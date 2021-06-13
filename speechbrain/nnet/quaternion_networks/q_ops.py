@@ -21,9 +21,9 @@ from torch.autograd import Variable
 
 class QuaternionLinearCustomBackward(torch.autograd.Function):
     """This class redefine the backpropagation of a quaternion linear layer
-       (not a spinor layer). By doing so, we can save up to 4x memory, but it
-       is also 2x slower than 'quaternion_linear_op'. It should be used
-       within speechbrain.nnet.quaternion_networks.linear.QuaternionLinear.
+    (not a spinor layer). By doing so, we can save up to 4x memory, but it
+    is also 2x slower than 'quaternion_linear_op'. It should be used
+    within speechbrain.nnet.quaternion_networks.linear.QuaternionLinear.
     """
 
     @staticmethod
@@ -742,7 +742,10 @@ def affect_init(
     """
 
     r, i, j, k = init_func(
-        r_weight.size(0), r_weight.size(1), None, init_criterion,
+        r_weight.size(0),
+        r_weight.size(1),
+        None,
+        init_criterion,
     )
 
     r_weight.data = r.type_as(r_weight.data)
@@ -760,7 +763,7 @@ def affect_conv_init(
     init_func,
     init_criterion,
 ):
-    """ Applies the weight initialization function given to the parameters.
+    """Applies the weight initialization function given to the parameters.
     This is specifically written for convolutional layers.
 
     Arguments

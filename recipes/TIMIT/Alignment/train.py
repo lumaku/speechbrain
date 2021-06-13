@@ -127,7 +127,8 @@ class AlignBrain(sb.Brain):
                 valid_stats={"loss": stage_loss, "accuracy": acc},
             )
             self.checkpointer.save_and_keep_only(
-                meta={"accuracy": acc}, max_keys=["accuracy"],
+                meta={"accuracy": acc},
+                max_keys=["accuracy"],
             )
 
         elif stage == sb.Stage.TEST:

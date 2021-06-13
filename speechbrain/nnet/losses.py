@@ -180,25 +180,25 @@ class PitWrapper(nn.Module):
 
     def forward(self, preds, targets):
         """
-            Arguments
-            ---------
-            preds : torch.Tensor
-                Network predictions tensor, of shape
-                [batch, channels, ..., sources].
-            targets : torch.Tensor
-                Target tensor, of shape [batch, channels, ..., sources].
+        Arguments
+        ---------
+        preds : torch.Tensor
+            Network predictions tensor, of shape
+            [batch, channels, ..., sources].
+        targets : torch.Tensor
+            Target tensor, of shape [batch, channels, ..., sources].
 
-            Returns
-            -------
-            loss : torch.Tensor
-                Permutation invariant loss for current examples, tensor of
-                shape [batch]
+        Returns
+        -------
+        loss : torch.Tensor
+            Permutation invariant loss for current examples, tensor of
+            shape [batch]
 
-            perms : list
-                List of indexes for optimal permutation of the inputs over
-                sources.
-                e.g., [(0, 1, 2), (2, 1, 0)] for three sources and 2 examples
-                per batch.
+        perms : list
+            List of indexes for optimal permutation of the inputs over
+            sources.
+            e.g., [(0, 1, 2), (2, 1, 0)] for three sources and 2 examples
+            per batch.
         """
         losses = []
         perms = []
@@ -621,7 +621,8 @@ def compute_masked_loss(
     mask = torch.ones_like(targets)
     if length is not None:
         length_mask = length_to_mask(
-            length * targets.shape[1], max_len=targets.shape[1],
+            length * targets.shape[1],
+            max_len=targets.shape[1],
         )
 
         # Handle any dimensionality of input
@@ -1043,7 +1044,9 @@ def ce_kd(inp, target):
 
 
 def nll_loss_kd(
-    probabilities, targets, rel_lab_lengths,
+    probabilities,
+    targets,
+    rel_lab_lengths,
 ):
     """Knowledge distillation for negative log-likelihood loss.
 

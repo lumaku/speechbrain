@@ -161,7 +161,8 @@ class ASR(sb.core.Brain):
                 valid_stats=stage_stats,
             )
             self.checkpointer.save_and_keep_only(
-                meta={"WER": stage_stats["WER"]}, min_keys=["WER"],
+                meta={"WER": stage_stats["WER"]},
+                min_keys=["WER"],
             )
         elif stage == sb.Stage.TEST:
             self.hparams.train_logger.log_stats(
@@ -181,7 +182,8 @@ def dataio_prepare(hparams):
     data_folder = hparams["data_folder"]
 
     train_data = sb.dataio.dataset.DynamicItemDataset.from_csv(
-        csv_path=hparams["train_csv"], replacements={"data_root": data_folder},
+        csv_path=hparams["train_csv"],
+        replacements={"data_root": data_folder},
     )
 
     if hparams["sorting"] == "ascending":
@@ -211,13 +213,15 @@ def dataio_prepare(hparams):
         )
 
     valid_data = sb.dataio.dataset.DynamicItemDataset.from_csv(
-        csv_path=hparams["valid_csv"], replacements={"data_root": data_folder},
+        csv_path=hparams["valid_csv"],
+        replacements={"data_root": data_folder},
     )
     # We also sort the validation data so it is faster to validate
     valid_data = valid_data.filtered_sorted(sort_key="duration")
 
     test_data = sb.dataio.dataset.DynamicItemDataset.from_csv(
-        csv_path=hparams["test_csv"], replacements={"data_root": data_folder},
+        csv_path=hparams["test_csv"],
+        replacements={"data_root": data_folder},
     )
 
     # We also sort the validation data so it is faster to validate
@@ -244,7 +248,8 @@ def dataio_prepare(hparams):
         if info.num_channels > 1:
             sig = torch.mean(sig, dim=1)
         resampled = torchaudio.transforms.Resample(
-            info.sample_rate, hparams["sample_rate"],
+            info.sample_rate,
+            hparams["sample_rate"],
         )(sig)
         return resampled
 
@@ -269,7 +274,8 @@ def dataio_prepare(hparams):
 
     # 4. Set output:
     sb.dataio.dataset.set_output_keys(
-        datasets, ["id", "sig", "tokens_bos", "tokens_eos", "tokens"],
+        datasets,
+        ["id", "sig", "tokens_bos", "tokens_eos", "tokens"],
     )
     return train_data, valid_data, test_data, tokenizer
 

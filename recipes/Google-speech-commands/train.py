@@ -24,8 +24,7 @@ from speechbrain.utils.distributed import run_on_main
 
 
 class SpeakerBrain(sb.core.Brain):
-    """Class for GSC training"
-    """
+    """Class for GSC training" """
 
     def compute_forward(self, batch, stage):
         """Computation pipeline based on a encoder + command classifier.
@@ -78,8 +77,7 @@ class SpeakerBrain(sb.core.Brain):
         return outputs, lens
 
     def compute_objectives(self, predictions, batch, stage):
-        """Computes the loss using command-id as label.
-        """
+        """Computes the loss using command-id as label."""
         predictions, lens = predictions
         uttid = batch.id
         command, _ = batch.command_encoded
@@ -190,7 +188,9 @@ def dataio_prep(hparams):
     # Load or compute the label encoder (with multi-GPU DDP support)
     lab_enc_file = os.path.join(hparams["save_folder"], "label_encoder.txt")
     label_encoder.load_or_create(
-        path=lab_enc_file, from_didatasets=[train_data], output_key="command",
+        path=lab_enc_file,
+        from_didatasets=[train_data],
+        output_key="command",
     )
 
     # 4. Set output:

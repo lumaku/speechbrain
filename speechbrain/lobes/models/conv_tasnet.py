@@ -230,7 +230,10 @@ class MaskNet(nn.Module):
 
         # [M, K, N] -> [M, K, B]
         self.bottleneck_conv1x1 = sb.nnet.CNN.Conv1d(
-            in_channels=N, out_channels=B, kernel_size=1, bias=False,
+            in_channels=N,
+            out_channels=B,
+            kernel_size=1,
+            bias=False,
         )
 
         # [M, K, B] -> [M, K, B]

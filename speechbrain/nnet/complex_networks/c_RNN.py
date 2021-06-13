@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 class CLSTM(torch.nn.Module):
-    """ This function implements a complex-valued LSTM.
+    """This function implements a complex-valued LSTM.
 
     Input format is (batch, time, fea) or (batch, time, fea, channel).
     In the latter shape, the two last dimensions will be merged:
@@ -93,7 +93,9 @@ class CLSTM(torch.nn.Module):
 
         self.rnn = self._init_layers()
 
-    def _init_layers(self,):
+    def _init_layers(
+        self,
+    ):
         """
         Initializes the layers of the ComplexLSTM.
 
@@ -180,7 +182,7 @@ class CLSTM(torch.nn.Module):
 
 
 class CLSTM_Layer(torch.nn.Module):
-    """ This function implements complex-valued LSTM layer.
+    """This function implements complex-valued LSTM layer.
 
     Arguments
     ---------
@@ -347,9 +349,10 @@ class CLSTM_Layer(torch.nn.Module):
             torch.ones(self.N_drop_masks, self.hidden_size * 2)
         ).data
 
-    def _sample_drop_mask(self,):
-        """Selects one of the pre-defined dropout masks
-        """
+    def _sample_drop_mask(
+        self,
+    ):
+        """Selects one of the pre-defined dropout masks"""
 
         if self.training:
 
@@ -357,7 +360,10 @@ class CLSTM_Layer(torch.nn.Module):
             if self.drop_mask_cnt + self.batch_size > self.N_drop_masks:
                 self.drop_mask_cnt = 0
                 self.drop_masks = self.drop(
-                    torch.ones(self.N_drop_masks, self.hidden_size * 2,)
+                    torch.ones(
+                        self.N_drop_masks,
+                        self.hidden_size * 2,
+                    )
                 ).data
 
             # Sampling the mask
@@ -383,12 +389,15 @@ class CLSTM_Layer(torch.nn.Module):
 
             if self.training:
                 self.drop_masks = self.drop(
-                    torch.ones(self.N_drop_masks, self.hidden_size * 2,)
+                    torch.ones(
+                        self.N_drop_masks,
+                        self.hidden_size * 2,
+                    )
                 ).data
 
 
 class CRNN(torch.nn.Module):
-    """ This function implements a vanilla complex-valued RNN.
+    """This function implements a vanilla complex-valued RNN.
 
     Input format is (batch, time, fea) or (batch, time, fea, channel).
     In the latter shape, the two last dimensions will be merged:
@@ -469,7 +478,9 @@ class CRNN(torch.nn.Module):
 
         self.rnn = self._init_layers()
 
-    def _init_layers(self,):
+    def _init_layers(
+        self,
+    ):
         """
         Initializes the layers of the CRNN.
 
@@ -556,7 +567,7 @@ class CRNN(torch.nn.Module):
 
 
 class CRNN_Layer(torch.nn.Module):
-    """ This function implements complex-valued recurrent layer.
+    """This function implements complex-valued recurrent layer.
 
     Arguments
     ---------
@@ -716,12 +727,16 @@ class CRNN_Layer(torch.nn.Module):
         self.drop_mask_cnt = 0
 
         self.drop_masks = self.drop(
-            torch.ones(self.N_drop_masks, self.hidden_size * 2,)
+            torch.ones(
+                self.N_drop_masks,
+                self.hidden_size * 2,
+            )
         ).data
 
-    def _sample_drop_mask(self,):
-        """Selects one of the pre-defined dropout masks.
-        """
+    def _sample_drop_mask(
+        self,
+    ):
+        """Selects one of the pre-defined dropout masks."""
 
         if self.training:
 
@@ -729,7 +744,10 @@ class CRNN_Layer(torch.nn.Module):
             if self.drop_mask_cnt + self.batch_size > self.N_drop_masks:
                 self.drop_mask_cnt = 0
                 self.drop_masks = self.drop(
-                    torch.ones(self.N_drop_masks, self.hidden_size * 2,)
+                    torch.ones(
+                        self.N_drop_masks,
+                        self.hidden_size * 2,
+                    )
                 ).data
 
             # Sampling the mask
@@ -755,12 +773,15 @@ class CRNN_Layer(torch.nn.Module):
 
             if self.training:
                 self.drop_masks = self.drop(
-                    torch.ones(self.N_drop_masks, self.hidden_size * 2,)
+                    torch.ones(
+                        self.N_drop_masks,
+                        self.hidden_size * 2,
+                    )
                 ).data
 
 
 class CLiGRU(torch.nn.Module):
-    """ This function implements a complex-valued Light GRU (liGRU).
+    """This function implements a complex-valued Light GRU (liGRU).
 
     Ligru is single-gate GRU model based on batch-norm + relu
     activations + recurrent dropout. For more info see:
@@ -1031,7 +1052,9 @@ class CLiGRU_Layer(torch.nn.Module):
 
         if self.normalization == "batchnorm":
             self.norm = CBatchNorm(
-                input_size=hidden_size * 2, dim=-1, momentum=0.05,
+                input_size=hidden_size * 2,
+                dim=-1,
+                momentum=0.05,
             )
             self.normalize = True
 
@@ -1143,16 +1166,20 @@ class CLiGRU_Layer(torch.nn.Module):
             torch.ones(self.N_drop_masks, self.hidden_size * 2)
         ).data
 
-    def _sample_drop_mask(self,):
-        """Selects one of the pre-defined dropout masks.
-        """
+    def _sample_drop_mask(
+        self,
+    ):
+        """Selects one of the pre-defined dropout masks."""
         if self.training:
 
             # Sample new masks when needed
             if self.drop_mask_cnt + self.batch_size > self.N_drop_masks:
                 self.drop_mask_cnt = 0
                 self.drop_masks = self.drop(
-                    torch.ones(self.N_drop_masks, self.hidden_size * 2,)
+                    torch.ones(
+                        self.N_drop_masks,
+                        self.hidden_size * 2,
+                    )
                 ).data
 
             # Sampling the mask

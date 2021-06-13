@@ -264,7 +264,14 @@ class Transducer(Function):
         log_p_alpha = torch.zeros((B,), device=log_probs.device)
         log_p_beta = torch.zeros((B,), device=log_probs.device)
         cu_kernel_forward[B, maxU](
-            log_probs, labels, alpha, log_p_alpha, T, U, blank, lock,
+            log_probs,
+            labels,
+            alpha,
+            log_p_alpha,
+            T,
+            U,
+            blank,
+            lock,
         )
         lock = lock * 0
         cu_kernel_backward[B, maxU](

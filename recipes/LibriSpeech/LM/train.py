@@ -93,7 +93,8 @@ class LM(sb.core.Brain):
                 valid_stats=stage_stats,
             )
             self.checkpointer.save_and_keep_only(
-                meta=stage_stats, min_keys=["loss"],
+                meta=stage_stats,
+                min_keys=["loss"],
             )
 
 
@@ -159,7 +160,8 @@ def dataio_prepare(hparams):
 
     # 4. Set output:
     sb.dataio.dataset.set_output_keys(
-        datasets, ["id", "text", "tokens_bos", "tokens_eos"],
+        datasets,
+        ["id", "text", "tokens_bos", "tokens_eos"],
     )
     return train_data, valid_data, test_data
 

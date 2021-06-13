@@ -120,7 +120,8 @@ def create_rirs(output_dir, sr=8000):
 
                     torchaudio.save(
                         os.path.join(
-                            output_dir, "{}_{}_".format(i, j) + output_name,
+                            output_dir,
+                            "{}_{}_".format(i, j) + output_name,
                         ),
                         h_torch,
                         sr,

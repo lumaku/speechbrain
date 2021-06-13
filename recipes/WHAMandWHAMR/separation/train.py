@@ -141,7 +141,8 @@ class Separation(sb.Brain):
                 if self.hparams.clip_grad_norm >= 0:
                     self.scaler.unscale_(self.optimizer)
                     torch.nn.utils.clip_grad_norm_(
-                        self.modules.parameters(), self.hparams.clip_grad_norm,
+                        self.modules.parameters(),
+                        self.hparams.clip_grad_norm,
                     )
                 self.scaler.step(self.optimizer)
                 self.scaler.update()
@@ -237,7 +238,8 @@ class Separation(sb.Brain):
                 valid_stats=stage_stats,
             )
             self.checkpointer.save_and_keep_only(
-                meta={"si-snr": stage_stats["si-snr"]}, min_keys=["si-snr"],
+                meta={"si-snr": stage_stats["si-snr"]},
+                min_keys=["si-snr"],
             )
         elif stage == sb.Stage.TEST:
             self.hparams.train_logger.log_stats(

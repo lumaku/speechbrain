@@ -170,7 +170,10 @@ class SEmodule(torch.nn.Module):
         bz, t, chn = input_shape
         self.conv = Sequential(input_shape=input_shape)
         self.conv.append(
-            DepthwiseSeparableConv1d, out_channels=chn, kernel_size=1, stride=1,
+            DepthwiseSeparableConv1d,
+            out_channels=chn,
+            kernel_size=1,
+            stride=1,
         )
         self.conv.append(self.norm)
         self.conv.append(self.activation())
@@ -270,7 +273,10 @@ class ContextNetBlock(torch.nn.Module):
         if residual:
             self.reduced_cov = Sequential(input_shape=input_shape)
             self.reduced_cov.append(
-                Conv1d, out_channels, kernel_size=3, stride=stride,
+                Conv1d,
+                out_channels,
+                kernel_size=3,
+                stride=stride,
             )
             self.reduced_cov.append(norm)
 

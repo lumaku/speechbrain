@@ -11,13 +11,22 @@ def test_batch_pad_right_to():
 
     for b in batch_lens:
         tensors = [
-            torch.ones(n_channels, random.randint(10, 53),) for x in range(b)
+            torch.ones(
+                n_channels,
+                random.randint(10, 53),
+            )
+            for x in range(b)
         ]
         batched, lens = batch_pad_right(tensors)
         assert batched.shape[0] == b
 
     for b in batch_lens:
-        tensors = [torch.ones(random.randint(10, 53),) for x in range(b)]
+        tensors = [
+            torch.ones(
+                random.randint(10, 53),
+            )
+            for x in range(b)
+        ]
         batched, lens = batch_pad_right(tensors)
         assert batched.shape[0] == b
 

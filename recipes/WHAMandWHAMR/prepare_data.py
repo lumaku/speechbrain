@@ -10,7 +10,10 @@ import csv
 
 
 def prepare_wham_whamr_csv(
-    datapath, savepath, skip_prep=False, fs=8000,
+    datapath,
+    savepath,
+    skip_prep=False,
+    fs=8000,
 ):
     """
     Prepares the csv files for wham or whamr dataset
@@ -75,13 +78,25 @@ def create_wham_whamr_csv(
 
     for set_type in set_types:
         mix_path = os.path.join(
-            datapath, "wav{}".format(sample_rate), version, set_type, mix_both,
+            datapath,
+            "wav{}".format(sample_rate),
+            version,
+            set_type,
+            mix_both,
         )
         s1_path = os.path.join(
-            datapath, "wav{}".format(sample_rate), version, set_type, s1,
+            datapath,
+            "wav{}".format(sample_rate),
+            version,
+            set_type,
+            s1,
         )
         s2_path = os.path.join(
-            datapath, "wav{}".format(sample_rate), version, set_type, s2,
+            datapath,
+            "wav{}".format(sample_rate),
+            version,
+            set_type,
+            s2,
         )
         noise_path = os.path.join(
             datapath, "wav{}".format(sample_rate), version, set_type, "noise/"

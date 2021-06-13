@@ -28,7 +28,9 @@ class tokenizer:
 
         save_file = os.path.join(save_folder, "tok.model")
         download_file(
-            source=tokenizer_file, dest=save_file, replace_existing=True,
+            source=tokenizer_file,
+            dest=save_file,
+            replace_existing=True,
         )
         tokenizer_file = save_file
 

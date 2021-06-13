@@ -144,7 +144,10 @@ class DynamicItemDataset(Dataset):
     """
 
     def __init__(
-        self, data, dynamic_items=[], output_keys=[],
+        self,
+        data,
+        dynamic_items=[],
+        output_keys=[],
     ):
         self.data = data
         self.data_ids = list(self.data.keys())
@@ -282,7 +285,12 @@ class DynamicItemDataset(Dataset):
         Temporarily changes the output keys!
         """
         filtered_sorted_ids = self._filtered_sorted_ids(
-            key_min_value, key_max_value, key_test, sort_key, reverse, select_n,
+            key_min_value,
+            key_max_value,
+            key_test,
+            sort_key,
+            reverse,
+            select_n,
         )
         return FilteredSortedDynamicItemDataset(
             self, filtered_sorted_ids

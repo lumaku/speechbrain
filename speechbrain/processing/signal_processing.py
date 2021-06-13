@@ -218,7 +218,9 @@ def convolve1d(
     # Padding can be a tuple (left_pad, right_pad) or an int
     if isinstance(padding, tuple):
         waveform = torch.nn.functional.pad(
-            input=waveform, pad=padding, mode=pad_type,
+            input=waveform,
+            pad=padding,
+            mode=pad_type,
         )
 
     # This approach uses FFT, which is more efficient if the kernel is large

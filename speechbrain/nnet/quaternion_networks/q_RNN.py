@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 class QLSTM(torch.nn.Module):
-    """ This function implements a quaternion-valued LSTM as first introduced
+    """This function implements a quaternion-valued LSTM as first introduced
     in : "Quaternion Recurrent Neural Networks", Parcollet T. et al.
 
     Input format is (batch, time, fea) or (batch, time, fea, channel).
@@ -97,7 +97,9 @@ class QLSTM(torch.nn.Module):
 
         self.rnn = self._init_layers()
 
-    def _init_layers(self,):
+    def _init_layers(
+        self,
+    ):
         """Initializes the layers of the quaternionLSTM.
 
         Arguments
@@ -181,7 +183,7 @@ class QLSTM(torch.nn.Module):
 
 
 class QLSTM_Layer(torch.nn.Module):
-    """ This function implements quaternion-valued LSTM layer.
+    """This function implements quaternion-valued LSTM layer.
 
     Arguments
     ---------
@@ -371,12 +373,14 @@ class QLSTM_Layer(torch.nn.Module):
         self.drop_mask_cnt = 0
 
         self.drop_masks = self.drop(
-            torch.ones(self.N_drop_masks, self.hidden_size * 4,)
+            torch.ones(
+                self.N_drop_masks,
+                self.hidden_size * 4,
+            )
         ).data
 
     def _sample_drop_mask(self, w):
-        """Selects one of the pre-defined dropout masks.
-        """
+        """Selects one of the pre-defined dropout masks."""
         if self.training:
 
             # Sample new masks when needed
@@ -418,7 +422,7 @@ class QLSTM_Layer(torch.nn.Module):
 
 
 class QRNN(torch.nn.Module):
-    """ This function implements a vanilla quaternion-valued RNN.
+    """This function implements a vanilla quaternion-valued RNN.
 
     Input format is (batch, time, fea) or (batch, time, fea, channel).
     In the latter shape, the two last dimensions will be merged:
@@ -503,7 +507,9 @@ class QRNN(torch.nn.Module):
 
         self.rnn = self._init_layers()
 
-    def _init_layers(self,):
+    def _init_layers(
+        self,
+    ):
         """
         Initializes the layers of the quaternionRNN.
 
@@ -753,12 +759,14 @@ class QRNN_Layer(torch.nn.Module):
         self.drop_mask_cnt = 0
 
         self.drop_masks = self.drop(
-            torch.ones(self.N_drop_masks, self.hidden_size * 4,)
+            torch.ones(
+                self.N_drop_masks,
+                self.hidden_size * 4,
+            )
         ).data
 
     def _sample_drop_mask(self, w):
-        """Selects one of the pre-defined dropout masks.
-        """
+        """Selects one of the pre-defined dropout masks."""
 
         if self.training:
 
@@ -801,7 +809,7 @@ class QRNN_Layer(torch.nn.Module):
 
 
 class QLiGRU(torch.nn.Module):
-    """ This function implements a quaternion-valued Light GRU (liGRU).
+    """This function implements a quaternion-valued Light GRU (liGRU).
 
     Ligru is single-gate GRU model based on batch-norm + relu
     activations + recurrent dropout. For more info see:
@@ -979,7 +987,7 @@ class QLiGRU(torch.nn.Module):
 
 
 class QLiGRU_Layer(torch.nn.Module):
-    """ This function implements quaternion-valued Light-Gated Recurrent Units
+    """This function implements quaternion-valued Light-Gated Recurrent Units
     (ligru) layer.
 
     Arguments
@@ -1180,8 +1188,7 @@ class QLiGRU_Layer(torch.nn.Module):
         )
 
     def _sample_drop_mask(self, w):
-        """Selects one of the pre-defined dropout masks
-        """
+        """Selects one of the pre-defined dropout masks"""
 
         if self.training:
 

@@ -175,7 +175,9 @@ def dynamic_mix_data_prep_librimix(hparams):
                 stop = start + minlen
 
             tmp, fs_read = torchaudio.load(
-                spk_file, frame_offset=start, num_frames=stop - start,
+                spk_file,
+                frame_offset=start,
+                num_frames=stop - start,
             )
             tmp = tmp[0].numpy()
             tmp = normalize(tmp)

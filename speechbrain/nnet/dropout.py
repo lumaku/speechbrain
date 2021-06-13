@@ -32,7 +32,9 @@ class Dropout2d(nn.Module):
     """
 
     def __init__(
-        self, drop_rate, inplace=False,
+        self,
+        drop_rate,
+        inplace=False,
     ):
         super().__init__()
         self.drop_rate = drop_rate

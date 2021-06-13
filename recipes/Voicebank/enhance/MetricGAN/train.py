@@ -194,7 +194,8 @@ class MetricGanBrain(sb.Brain):
                 lengths=lens[new_ids],
             )
             score = torch.tensor(
-                [[s] for s in self.target_metric.scores], device=self.device,
+                [[s] for s in self.target_metric.scores],
+                device=self.device,
             )
         elif self.hparams.target_metric == "stoi":
             self.target_metric.append(
@@ -205,7 +206,8 @@ class MetricGanBrain(sb.Brain):
                 reduction="batch",
             )
             score = torch.tensor(
-                [[-s] for s in self.target_metric.scores], device=self.device,
+                [[-s] for s in self.target_metric.scores],
+                device=self.device,
             )
         else:
             raise ValueError("Expected 'pesq' or 'stoi' for target_metric")

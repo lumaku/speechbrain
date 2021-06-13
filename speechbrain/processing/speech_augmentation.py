@@ -144,7 +144,8 @@ class AddNoise(torch.nn.Module):
         else:
             tensor_length = waveforms.shape[1]
             noise_waveform, noise_length = self._load_noise(
-                lengths, tensor_length,
+                lengths,
+                tensor_length,
             )
 
             # Rescale and add
@@ -432,7 +433,10 @@ class SpeedPerturb(torch.nn.Module):
     """
 
     def __init__(
-        self, orig_freq, speeds=[90, 100, 110], perturb_prob=1.0,
+        self,
+        orig_freq,
+        speeds=[90, 100, 110],
+        perturb_prob=1.0,
     ):
         super().__init__()
         self.orig_freq = orig_freq
@@ -507,7 +511,10 @@ class Resample(torch.nn.Module):
     """
 
     def __init__(
-        self, orig_freq=16000, new_freq=16000, lowpass_filter_width=6,
+        self,
+        orig_freq=16000,
+        new_freq=16000,
+        lowpass_filter_width=6,
     ):
         super().__init__()
         self.orig_freq = orig_freq
@@ -741,7 +748,9 @@ class Resample(torch.nn.Module):
 
         assert lowpass_cutoff < min(self.orig_freq, self.new_freq) / 2
         output_t = torch.arange(
-            start=0.0, end=self.output_samples, device=waveforms.device,
+            start=0.0,
+            end=self.output_samples,
+            device=waveforms.device,
         )
         output_t /= self.new_freq
         min_t = output_t - window_width
@@ -817,7 +826,11 @@ class AddBabble(torch.nn.Module):
     """
 
     def __init__(
-        self, speaker_count=3, snr_low=0, snr_high=0, mix_prob=1,
+        self,
+        speaker_count=3,
+        snr_low=0,
+        snr_high=0,
+        mix_prob=1,
     ):
         super().__init__()
         self.speaker_count = speaker_count
@@ -946,7 +959,9 @@ class DropFreq(torch.nn.Module):
 
         # Pick number of frequencies to drop
         drop_count = torch.randint(
-            low=self.drop_count_low, high=self.drop_count_high + 1, size=(1,),
+            low=self.drop_count_low,
+            high=self.drop_count_high + 1,
+            size=(1,),
         )
 
         # Pick a frequency to drop
@@ -966,7 +981,9 @@ class DropFreq(torch.nn.Module):
         # Subtract each frequency
         for frequency in drop_frequency:
             notch_kernel = notch_filter(
-                frequency, filter_length, self.drop_width,
+                frequency,
+                filter_length,
+                self.drop_width,
             ).to(waveforms.device)
             drop_filter = convolve1d(drop_filter, notch_kernel, pad)
 
@@ -1118,7 +1135,9 @@ class DropChunk(torch.nn.Module):
 
             # Pick starting locations
             start = torch.randint(
-                low=start_min, high=start_max + 1, size=(drop_times[i],),
+                low=start_min,
+                high=start_max + 1,
+                size=(drop_times[i],),
             )
 
             end = start + length
@@ -1164,7 +1183,10 @@ class DoClip(torch.nn.Module):
     """
 
     def __init__(
-        self, clip_low=0.5, clip_high=1, clip_prob=1,
+        self,
+        clip_low=0.5,
+        clip_high=1,
+        clip_prob=1,
     ):
         super().__init__()
         self.clip_low = clip_low
@@ -1189,7 +1211,13 @@ class DoClip(torch.nn.Module):
 
         # Randomly select clip value
         clipping_range = self.clip_high - self.clip_low
-        clip_value = torch.rand(1,)[0] * clipping_range + self.clip_low
+        clip_value = (
+            torch.rand(
+                1,
+            )[0]
+            * clipping_range
+            + self.clip_low
+        )
 
         # Apply clipping
         clipped_waveform = waveforms.clamp(-clip_value, clip_value)

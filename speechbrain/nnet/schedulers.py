@@ -220,7 +220,10 @@ class StepScheduler:
     """
 
     def __init__(
-        self, initial_value, decay_factor=0.5, decay_drop=2,
+        self,
+        initial_value,
+        decay_factor=0.5,
+        decay_drop=2,
     ):
         self.initial_value = initial_value
         self.decay_factor = decay_factor

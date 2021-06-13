@@ -292,7 +292,10 @@ class HMMAligner(torch.nn.Module):
         return poss_phns, log_transition_matrix, start_states, final_states
 
     def use_lexicon(
-        self, words, interword_sils=True, sample_pron=False,
+        self,
+        words,
+        interword_sils=True,
+        sample_pron=False,
     ):
         """Do processing using the lexicon to return a sequence of the possible
         phonemes, the transition/pi probabilities, and the possible final

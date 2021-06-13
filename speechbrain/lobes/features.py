@@ -120,7 +120,8 @@ class Fbank(torch.nn.Module):
         )
         self.compute_deltas = Deltas(input_size=n_mels)
         self.context_window = ContextWindow(
-            left_frames=left_frames, right_frames=right_frames,
+            left_frames=left_frames,
+            right_frames=right_frames,
         )
 
     def forward(self, wav):
@@ -258,7 +259,8 @@ class MFCC(torch.nn.Module):
         self.compute_dct = DCT(input_size=n_mels, n_out=n_mfcc)
         self.compute_deltas = Deltas(input_size=n_mfcc)
         self.context_window = ContextWindow(
-            left_frames=left_frames, right_frames=right_frames,
+            left_frames=left_frames,
+            right_frames=right_frames,
         )
 
     def forward(self, wav):

@@ -142,7 +142,9 @@ def dynamic_mix_data_prep(hparams):
                 stop = start + minlen
 
             tmp, fs_read = torchaudio.load(
-                spk_file, frame_offset=start, num_frames=stop - start,
+                spk_file,
+                frame_offset=start,
+                num_frames=stop - start,
             )
 
             # peak = float(Path(spk_file).stem.split("_peak_")[-1])

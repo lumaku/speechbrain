@@ -160,7 +160,8 @@ class ASR(sb.Brain):
                 valid_stats=stage_stats,
             )
             self.checkpointer.save_and_keep_only(
-                meta={"CER": stage_stats["CER"]}, min_keys=["CER"],
+                meta={"CER": stage_stats["CER"]},
+                min_keys=["CER"],
             )
         elif stage == sb.Stage.TEST:
             self.hparams.train_logger.log_stats(
@@ -177,7 +178,8 @@ def dataio_prepare(hparams):
     data_folder = hparams["data_folder"]
 
     train_data = sb.dataio.dataset.DynamicItemDataset.from_csv(
-        csv_path=hparams["train_data"], replacements={"data_root": data_folder},
+        csv_path=hparams["train_data"],
+        replacements={"data_root": data_folder},
     )
 
     if hparams["sorting"] == "ascending":
@@ -202,12 +204,14 @@ def dataio_prepare(hparams):
         )
 
     valid_data = sb.dataio.dataset.DynamicItemDataset.from_csv(
-        csv_path=hparams["valid_data"], replacements={"data_root": data_folder},
+        csv_path=hparams["valid_data"],
+        replacements={"data_root": data_folder},
     )
     valid_data = valid_data.filtered_sorted(sort_key="duration")
 
     test_data = sb.dataio.dataset.DynamicItemDataset.from_csv(
-        csv_path=hparams["test_data"], replacements={"data_root": data_folder},
+        csv_path=hparams["test_data"],
+        replacements={"data_root": data_folder},
     )
     test_data = test_data.filtered_sorted(sort_key="duration")
 
@@ -245,7 +249,8 @@ def dataio_prepare(hparams):
 
     # 4. Set output:
     sb.dataio.dataset.set_output_keys(
-        datasets, ["id", "sig", "wrd", "tokens_bos", "tokens_eos", "tokens"],
+        datasets,
+        ["id", "sig", "wrd", "tokens_bos", "tokens_eos", "tokens"],
     )
     return train_data, valid_data, test_data, tokenizer
 

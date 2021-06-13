@@ -95,7 +95,8 @@ class ASR_Brain(sb.Brain):
                 valid_stats={"loss": stage_loss, "PER": per},
             )
             self.checkpointer.save_and_keep_only(
-                meta={"PER": per}, min_keys=["PER"],
+                meta={"PER": per},
+                min_keys=["PER"],
             )
 
         elif stage == sb.Stage.TEST:

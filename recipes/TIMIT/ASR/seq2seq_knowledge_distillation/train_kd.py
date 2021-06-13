@@ -237,7 +237,12 @@ class ASR(sb.Brain):
             self.ctc_metrics.append(ids, p_ctc, phns, wav_lens, phn_lens)
             self.seq_metrics.append(ids, p_seq, phns_eos, phn_lens_eos)
             self.per_metrics.append(
-                ids, hyps, phns, None, phn_lens, self.label_encoder.decode_ndim,
+                ids,
+                hyps,
+                phns,
+                None,
+                phn_lens,
+                self.label_encoder.decode_ndim,
             )
 
         return loss

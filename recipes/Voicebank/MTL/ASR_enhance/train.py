@@ -31,7 +31,10 @@ from speechbrain.utils.distributed import run_on_main
 
 def pesq_eval(pred_wav, target_wav):
     return pesq(
-        fs=16000, ref=target_wav.numpy(), deg=pred_wav.numpy(), mode="wb",
+        fs=16000,
+        ref=target_wav.numpy(),
+        deg=pred_wav.numpy(),
+        mode="wb",
     )
 
 
@@ -398,7 +401,8 @@ def dataio_prep(hparams, token_encoder):
     # Sort train dataset and ensure it doesn't get un-sorted
     if hparams["sorting"] == "ascending" or hparams["sorting"] == "descending":
         data["train"] = data["train"].filtered_sorted(
-            sort_key="length", reverse=hparams["sorting"] == "descending",
+            sort_key="length",
+            reverse=hparams["sorting"] == "descending",
         )
         hparams["train_loader_options"]["shuffle"] = False
     elif hparams["sorting"] != "random":

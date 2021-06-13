@@ -146,7 +146,9 @@ class ASR(sb.Brain):
             g_sets = f.create_group(stage[num])
 
             with tqdm(
-                data_sets[num], initial=self.step, dynamic_ncols=True,
+                data_sets[num],
+                initial=self.step,
+                dynamic_ncols=True,
             ) as t:
                 for batch in t:
                     self.step += 1

@@ -108,7 +108,9 @@ def prepare_dns(
 
     # Clean is excluded here, but will be picked up by `create_csv`
     wav_lst_test = get_all_files(
-        test_folder, match_and=extension, exclude_or=["/clean/"],
+        test_folder,
+        match_and=extension,
+        exclude_or=["/clean/"],
     )
 
     # Split training into validation and training

@@ -19,7 +19,8 @@ def test_ConcatDatasetBatchSampler():
     samplers = [ReproducibleRandomSampler(x) for x in datasets]
     dataset = ConcatDataset(datasets)
     loader = DataLoader(
-        dataset, batch_sampler=ConcatDatasetBatchSampler(samplers, [1, 1, 1]),
+        dataset,
+        batch_sampler=ConcatDatasetBatchSampler(samplers, [1, 1, 1]),
     )
 
     concat_data = []
@@ -31,7 +32,10 @@ def test_ConcatDatasetBatchSampler():
     non_cat_data = []
     for i in range(len(samplers)):
         c_data = []
-        loader = DataLoader(dataset.datasets[i], sampler=samplers[i],)
+        loader = DataLoader(
+            dataset.datasets[i],
+            sampler=samplers[i],
+        )
 
         for data in loader:
             c_data.append(data[0].item())

@@ -60,7 +60,11 @@ class EnhancementGenerator(nn.Module):
     """
 
     def __init__(
-        self, input_size=257, hidden_size=200, num_layers=2, dropout=0,
+        self,
+        input_size=257,
+        hidden_size=200,
+        num_layers=2,
+        dropout=0,
     ):
         super().__init__()
         self.activation = nn.LeakyReLU(negative_slope=0.3)
@@ -119,7 +123,10 @@ class MetricDiscriminator(nn.Module):
     """
 
     def __init__(
-        self, kernel_size=(5, 5), base_channels=15, activation=nn.LeakyReLU,
+        self,
+        kernel_size=(5, 5),
+        base_channels=15,
+        activation=nn.LeakyReLU,
     ):
         super().__init__()
 

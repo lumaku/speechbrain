@@ -824,7 +824,9 @@ class TextEncoder(CategoricalEncoder):
         )
 
     def add_bos_eos(
-        self, bos_label=DEFAULT_BOS, eos_label=DEFAULT_EOS,
+        self,
+        bos_label=DEFAULT_BOS,
+        eos_label=DEFAULT_EOS,
     ):
         """Add sentence boundary markers in the label set.
 

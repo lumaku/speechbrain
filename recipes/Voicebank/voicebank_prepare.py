@@ -225,10 +225,14 @@ def prepare_voicebank(
     extension = [".wav"]
     valid_speakers = TRAIN_SPEAKERS[:valid_speaker_count]
     wav_lst_train = get_all_files(
-        train_noisy_folder, match_and=extension, exclude_or=valid_speakers,
+        train_noisy_folder,
+        match_and=extension,
+        exclude_or=valid_speakers,
     )
     wav_lst_valid = get_all_files(
-        train_noisy_folder, match_and=extension, match_or=valid_speakers,
+        train_noisy_folder,
+        match_and=extension,
+        match_or=valid_speakers,
     )
     wav_lst_test = get_all_files(test_noisy_folder, match_and=extension)
 

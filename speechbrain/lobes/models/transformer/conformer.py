@@ -128,7 +128,11 @@ class ConformerEncoderLayer(nn.Module):
         super().__init__()
 
         self.Multihead_attn = MultiheadAttention(
-            nhead=nhead, d_model=d_model, dropout=dropout, kdim=kdim, vdim=vdim,
+            nhead=nhead,
+            d_model=d_model,
+            dropout=dropout,
+            kdim=kdim,
+            vdim=vdim,
         )
 
         self.convolution_module = ConvolutionModule(
@@ -162,7 +166,11 @@ class ConformerEncoderLayer(nn.Module):
         # muti-head attention module
         x = self.norm1(x)
         output, self_attn = self.Multihead_attn(
-            x, x, x, attn_mask=src_mask, key_padding_mask=src_key_padding_mask,
+            x,
+            x,
+            x,
+            attn_mask=src_mask,
+            key_padding_mask=src_key_padding_mask,
         )
         x = x + output
 

@@ -121,7 +121,7 @@ class SLU(sb.Brain):
         return loss
 
     def log_outputs(self, predicted_semantics, target_semantics):
-        """ TODO: log these to a file instead of stdout """
+        """TODO: log these to a file instead of stdout"""
         for i in range(len(target_semantics)):
             print(" ".join(predicted_semantics[i]).replace("|", ","))
             print(" ".join(target_semantics[i]).replace("|", ","))
@@ -173,7 +173,8 @@ class SLU(sb.Brain):
                 valid_stats=stage_stats,
             )
             self.checkpointer.save_and_keep_only(
-                meta={"WER": stage_stats["WER"]}, min_keys=["WER"],
+                meta={"WER": stage_stats["WER"]},
+                min_keys=["WER"],
             )
         elif stage == sb.Stage.TEST:
             self.hparams.train_logger.log_stats(
@@ -191,7 +192,8 @@ def dataio_prepare(hparams):
     data_folder = hparams["data_folder"]
 
     train_data = sb.dataio.dataset.DynamicItemDataset.from_csv(
-        csv_path=hparams["csv_train"], replacements={"data_root": data_folder},
+        csv_path=hparams["csv_train"],
+        replacements={"data_root": data_folder},
     )
 
     if hparams["sorting"] == "ascending":
@@ -216,12 +218,14 @@ def dataio_prepare(hparams):
         )
 
     valid_data = sb.dataio.dataset.DynamicItemDataset.from_csv(
-        csv_path=hparams["csv_valid"], replacements={"data_root": data_folder},
+        csv_path=hparams["csv_valid"],
+        replacements={"data_root": data_folder},
     )
     valid_data = valid_data.filtered_sorted(sort_key="duration")
 
     test_data = sb.dataio.dataset.DynamicItemDataset.from_csv(
-        csv_path=hparams["csv_test"], replacements={"data_root": data_folder},
+        csv_path=hparams["csv_test"],
+        replacements={"data_root": data_folder},
     )
     test_data = test_data.filtered_sorted(sort_key="duration")
 

@@ -111,7 +111,11 @@ class TransformerASR(TransformerInterface):
         self._init_params()
 
     def forward(
-        self, src, tgt, wav_len=None, pad_idx=0,
+        self,
+        src,
+        tgt,
+        wav_len=None,
+        pad_idx=0,
     ):
         """
         Arguments
@@ -196,7 +200,9 @@ class TransformerASR(TransformerInterface):
         return prediction, multihead_attns[-1]
 
     def encode(
-        self, src, wav_len=None,
+        self,
+        src,
+        wav_len=None,
     ):
         """
         forward the encoder with source input

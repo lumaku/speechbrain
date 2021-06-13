@@ -381,7 +381,10 @@ class TransducerBeamSearcher(torch.nn.Module):
 
         with torch.no_grad():
             # the output would be a tensor of [B,T,U, oneof[sum,concat](Hidden_TN,Hidden_PN)]
-            out = self.tjoint(h_i, out_PN,)
+            out = self.tjoint(
+                h_i,
+                out_PN,
+            )
             # forward the output layers + activation + save logits
             out = self._forward_after_joint(out, self.classifier_network)
             log_probs = self.softmax(out)

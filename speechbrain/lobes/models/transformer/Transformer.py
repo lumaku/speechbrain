@@ -121,8 +121,7 @@ class TransformerInterface(nn.Module):
             )
 
     def forward(self, **kwags):
-        """Users should modify this function according to their own tasks.
-        """
+        """Users should modify this function according to their own tasks."""
         raise NotImplementedError
 
 
@@ -215,7 +214,11 @@ class TransformerEncoderLayer(nn.Module):
         super().__init__()
 
         self.self_att = sb.nnet.attention.MultiheadAttention(
-            nhead=nhead, d_model=d_model, dropout=dropout, kdim=kdim, vdim=vdim,
+            nhead=nhead,
+            d_model=d_model,
+            dropout=dropout,
+            kdim=kdim,
+            vdim=vdim,
         )
         self.pos_ffn = sb.nnet.attention.PositionalwiseFeedForward(
             d_ffn=d_ffn,
@@ -426,10 +429,18 @@ class TransformerDecoderLayer(nn.Module):
     ):
         super().__init__()
         self.self_attn = sb.nnet.attention.MultiheadAttention(
-            nhead=nhead, d_model=d_model, kdim=kdim, vdim=vdim, dropout=dropout,
+            nhead=nhead,
+            d_model=d_model,
+            kdim=kdim,
+            vdim=vdim,
+            dropout=dropout,
         )
         self.mutihead_attn = sb.nnet.attention.MultiheadAttention(
-            nhead=nhead, d_model=d_model, kdim=kdim, vdim=vdim, dropout=dropout,
+            nhead=nhead,
+            d_model=d_model,
+            kdim=kdim,
+            vdim=vdim,
+            dropout=dropout,
         )
         self.pos_ffn = sb.nnet.attention.PositionalwiseFeedForward(
             d_ffn=d_ffn,

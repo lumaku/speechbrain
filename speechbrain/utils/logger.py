@@ -80,7 +80,9 @@ class TqdmCompatibleStreamHandler(logging.StreamHandler):
 
 
 def setup_logging(
-    config_path="log-config.yaml", overrides={}, default_level=logging.INFO,
+    config_path="log-config.yaml",
+    overrides={},
+    default_level=logging.INFO,
 ):
     """Setup logging configuration.
 

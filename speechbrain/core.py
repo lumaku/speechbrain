@@ -185,7 +185,9 @@ def parse_arguments(arg_list):
     )
     # if use_env = False in torch.distributed.lunch then local_rank arg is given
     parser.add_argument(
-        "--local_rank", type=int, help="Rank on local machine",
+        "--local_rank",
+        type=int,
+        help="Rank on local machine",
     )
     parser.add_argument(
         "--device",
@@ -616,7 +618,11 @@ class Brain:
         pass
 
     def make_dataloader(
-        self, dataset, stage, ckpt_prefix="dataloader-", **loader_kwargs,
+        self,
+        dataset,
+        stage,
+        ckpt_prefix="dataloader-",
+        **loader_kwargs,
     ):
         """Creates DataLoaders for Datasets.
 

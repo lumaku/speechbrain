@@ -23,7 +23,11 @@ def test_normalize():
                 )
                 amp = compute_amplitude(test_vec, lengths, amp_type, scale)
                 scaled_back = rescale(
-                    random.random() * test_vec, lengths, amp, amp_type, scale,
+                    random.random() * test_vec,
+                    lengths,
+                    amp,
+                    amp_type,
+                    scale,
                 )
                 np.testing.assert_array_almost_equal(
                     scaled_back.numpy(), test_vec.numpy()

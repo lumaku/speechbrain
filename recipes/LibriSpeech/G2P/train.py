@@ -145,7 +145,8 @@ def dataio_prep(hparams):
     data_folder = hparams["data_folder"]
     # 1. Declarations:
     train_data = sb.dataio.dataset.DynamicItemDataset.from_csv(
-        csv_path=hparams["train_data"], replacements={"data_root": data_folder},
+        csv_path=hparams["train_data"],
+        replacements={"data_root": data_folder},
     )
     if hparams["sorting"] == "ascending":
         # we sort training data to speed up training and get better results.
@@ -169,12 +170,14 @@ def dataio_prep(hparams):
         )
 
     valid_data = sb.dataio.dataset.DynamicItemDataset.from_csv(
-        csv_path=hparams["valid_data"], replacements={"data_root": data_folder},
+        csv_path=hparams["valid_data"],
+        replacements={"data_root": data_folder},
     )
     valid_data = valid_data.filtered_sorted(sort_key="duration")
 
     test_data = sb.dataio.dataset.DynamicItemDataset.from_csv(
-        csv_path=hparams["test_data"], replacements={"data_root": data_folder},
+        csv_path=hparams["test_data"],
+        replacements={"data_root": data_folder},
     )
     test_data = test_data.filtered_sorted(sort_key="duration")
 
@@ -314,5 +317,7 @@ if __name__ == "__main__":
 
     # Test
     asr_brain.evaluate(
-        test_data, min_key="PER", test_loader_kwargs=hparams["dataloader_opts"],
+        test_data,
+        min_key="PER",
+        test_loader_kwargs=hparams["dataloader_opts"],
     )

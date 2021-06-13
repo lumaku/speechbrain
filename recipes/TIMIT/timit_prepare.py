@@ -356,7 +356,10 @@ def skip(annotations):
 
 
 def create_json(
-    wav_lst, json_file, uppercase, phn_set,
+    wav_lst,
+    json_file,
+    uppercase,
+    phn_set,
 ):
     """
     Creates the json file given a list of wav files.

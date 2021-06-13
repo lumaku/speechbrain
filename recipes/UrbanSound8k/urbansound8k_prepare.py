@@ -166,8 +166,8 @@ def prepare_urban_sound_8k(
         os.path.abspath(data_folder), "metadata/", MODIFIED_METADATA_FILE_NAME
     )
     if not os.path.exists(urban_sound_8k_speechbrain_metadata_csv_path):
-        urban_sound_8k_speechbrain_metadata_csv_path = create_metadata_speechbrain_file(
-            data_folder
+        urban_sound_8k_speechbrain_metadata_csv_path = (
+            create_metadata_speechbrain_file(data_folder)
         )
         # TODO: If it does not exist, we create it, but next step will certainly fail?
 

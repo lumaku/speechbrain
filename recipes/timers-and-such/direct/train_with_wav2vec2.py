@@ -172,7 +172,8 @@ class SLU(sb.Brain):
                 valid_stats=stage_stats,
             )
             self.checkpointer.save_and_keep_only(
-                meta={"SER": stage_stats["SER"]}, min_keys=["SER"],
+                meta={"SER": stage_stats["SER"]},
+                min_keys=["SER"],
             )
         elif stage == sb.Stage.TEST:
             self.hparams.train_logger.log_stats(
@@ -203,7 +204,8 @@ def dataio_prepare(hparams):
     data_folder = hparams["data_folder"]
 
     train_data = sb.dataio.dataset.DynamicItemDataset.from_csv(
-        csv_path=hparams["csv_train"], replacements={"data_root": data_folder},
+        csv_path=hparams["csv_train"],
+        replacements={"data_root": data_folder},
     )
 
     if hparams["sorting"] == "ascending":
@@ -234,7 +236,8 @@ def dataio_prepare(hparams):
     else:
         valid_path = hparams["csv_dev_real"]
     valid_data = sb.dataio.dataset.DynamicItemDataset.from_csv(
-        csv_path=valid_path, replacements={"data_root": data_folder},
+        csv_path=valid_path,
+        replacements={"data_root": data_folder},
     )
     valid_data = valid_data.filtered_sorted(sort_key="duration")
 

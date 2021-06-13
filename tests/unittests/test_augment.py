@@ -112,7 +112,10 @@ def test_babble():
     from speechbrain.processing.speech_augmentation import AddBabble
 
     test_waveform = torch.stack(
-        (torch.sin(torch.arange(16000.0)), torch.cos(torch.arange(16000.0)),)
+        (
+            torch.sin(torch.arange(16000.0)),
+            torch.cos(torch.arange(16000.0)),
+        )
     )
     lengths = torch.ones(2)
 
